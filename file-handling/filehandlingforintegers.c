@@ -2,14 +2,14 @@
 int main(){
     int i,sum=0;
     FILE *f1;
-    f1=fopen("data.bin","w");
+    f1=fopen("data.bin","w");//openeing the file data.bin in write mode (it will create a file if not present)
     for(int i=0;i<5;i++){
-        putw(i,f1);
+        putw(i,f1);//inputing integers from 1 to 4 
     }
-    fclose(f1);
-    f1=fopen("data.bin","r");
+    fclose(f1);//closing file
+    f1=fopen("data.bin","r");//creating a file named data bin
     while((i=getw(f1))!=EOF){
-        sum = sum + i;
+        sum = sum + i;//sum = 1+ 2 + 3 + 4 = 10
     }
     printf("%d",sum);
     fclose(f1);
