@@ -1,5 +1,6 @@
 #include <stdio.h>
 int freq(int a[][3],int x,int y);
+int largest(int a[][3],int x,int y);
 int main(){
     int n,m;//n is the rows and m is the columns
     printf("enter rows:");
@@ -13,30 +14,39 @@ int main(){
         }
     }
     freq(arr,n,m);
+    int lar = largest(arr,n,m);
+    printf("the largest element in the diagonal is:%d",lar);
 }
 int freq(int a[][3],int x,int y){
-    int p = x;
-    int q = y;
-    int count =0;
-    printf("first diagonal elements:\n");
-    for(int i=0;i<p;i++){
-        for(int j=0;j<q;j++){
-            if(a[i][i]==a[i][j]){
-                count++;
-            }
-        }
-        printf("%d:%d \n",a[i][i],count);
-        count = 0;
+int index = 0;
+int z[9];
+int count=1;
+int sum=1;
+int w=1;
+for(int i=0;i<x;i++){
+    for(int j=0;j<y;j++){
+        z[index++]=a[i][j];
     }
-    int r=1;
-    printf("second diagonal elements:\n");
-    for(int i=0;i<p;i++){
-        for(int j=0;j<q;j++){
-            if(a[i][q-1-i]==a[i][j]){
-                r++;
-            }
+}
+for(int i=0;i<x;i++){
+        if(z[0]==z[i]){
+            count++;
         }
-        printf("%d:%d \n",a[i][p-i],r);
-        r = 0;
+        if(z[4]==z[i]){
+            sum++;
+        }
+        if(z[8]==z[i]){
+            w++;
+        }
     }
+printf("the occurences of %d : %d , %d : %d , %d : %d \n",z[0],count,z[4],sum,z[8],w);
+}
+int largest(int a[][3],int x,int y){
+    int large = a[0][0];
+    for(int i=0;i<x;i++){
+        if(large<a[i][i]){
+            large = a[i][i];
+        }
+        }
+        return(large);
 }
