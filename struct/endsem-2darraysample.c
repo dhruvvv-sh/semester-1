@@ -18,28 +18,28 @@ int main(){
     printf("the largest element in the diagonal is:%d",lar);
 }
 int freq(int a[][3],int x,int y){
-int index = 0;
-int z[9];
-int count=1;
-int sum=1;
-int w=1;
+int k=0;
+int intial[9];
+int count[3]={0,0,0};
 for(int i=0;i<x;i++){
     for(int j=0;j<y;j++){
-        z[index++]=a[i][j];
+        intial[k++]=a[i][j];
     }
 }
-for(int i=0;i<x;i++){
-        if(z[0]==z[i]){
-            count++;
-        }
-        if(z[4]==z[i]){
-            sum++;
-        }
-        if(z[8]==z[i]){
-            w++;
-        }
+int diagonal[3] = {a[0][0], a[1][1], a[2][2]}; // The diagonal elements
+    // Counting the frequency of each diagonal element in the entire matrix
+    for (int i = 0; i < 9; i++) {
+        if (intial[i] == diagonal[0]) 
+        count[0]++;
+        if (intial[i] == diagonal[1]) 
+        count[1]++;
+        if (intial[i] == diagonal[2]) 
+        count[2]++;
     }
-printf("the occurences of %d : %d , %d : %d , %d : %d \n",z[0],count,z[4],sum,z[8],w);
+    printf("Frequency of diagonal elements:\n");
+    for (int i = 0; i < 3; i++) {
+        printf("%d: %d times \n", diagonal[i], count[i]);
+    }
 }
 int largest(int a[][3],int x,int y){
     int large = a[0][0];
