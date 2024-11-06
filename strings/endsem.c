@@ -9,8 +9,7 @@ int main() {
     char c[50];
     
     printf("Enter string: ");
-    fgets(c, sizeof(c), stdin);  // Using fgets to avoid buffer overflow
-    c[strcspn(c, "\n")] = 0;  // Remove the newline character added by fgets
+    gets(c); 
     
     sort(c);
     
