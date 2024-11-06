@@ -1,35 +1,62 @@
 #include <stdio.h>
-void w(char c[]);
-int main(){
-    char sent[50];
-    printf("enter your sentence:");
-    gets(sent);
-    printf("the sentence is: \n");
-    puts(sent);
-    printf("the sentence after the change:\n");
-    w(sent);
-}
-void w(char c[]){
-    int count = 1;
-    for(int i=0;c[i]!='\0';i++){
-        if(c[i]==' '&&c[i+1]!=' '){
-            count++;
-        }
-    }
-char e[count][10];  // Array to store words, assuming max word length is 9 characters
-    int k = 0, word_idx = 0, letter_idx = 0;
+#include <string.h>
 
-    // Splitting the sentence into words
-    for (int i = 0; i <= strlen(c); i++) {
-        if (c[i] == ' ' || c[i] == '\0') {  // End of a word
-            e[word_idx][letter_idx] = '\0';  // Null-terminate the current word
-            word_idx++;
-            letter_idx = 0;
+// Function to sort words in a string
+void sort(char x[]);
+
+int main() {
+    // Part A: Read and display the string
+    char c[50];
+    
+    printf("Enter string: ");
+    fgets(c, sizeof(c), stdin);  // Using fgets to avoid buffer overflow
+    c[strcspn(c, "\n")] = 0;  // Remove the newline character added by fgets
+    
+    sort(c);
+    
+    return 0;
+}
+
+// Function to sort words alphabetically
+void sort(char x[]) {
+    int k = 0;  // Word index
+    int word = 0;  // Character index within a word
+    char w[50][50];  // Array to store words
+    char temp[50];  // Temporary array for swapping
+
+    // Splitting the string into words
+    for (int i = 0; i <= strlen(x); i++) {
+        if (x[i] == ' ' || x[i] == '\0') {
+            w[k][word] = '\0';  // Null terminate the current word
+            k++;  // Move to the next word
+            word = 0;  // Reset character index for the new word
         } else {
-            e[word_idx][letter_idx++] = c[i];  // Copy character to current word
+            w[k][word++] = x[i];  // Add characters to the current word
         }
     }
-    for (int i = 0; i < count; i++) {
-        printf("%s\n", e[i]);
+    
+    int n = k;  // Number of words
+
+    // Sorting the words alphabetically using bubble sort
+    for (int i = 0; i < n - 1; i++) {
+        for (int j = i + 1; j < n; j++) {
+            if (strcmp(w[i], w[j]) > 0) {
+                strcpy(temp, w[i]);
+                strcpy(w[i], w[j]);
+                strcpy(w[j], temp);
+            }
+        }
     }
+
+    // Reconstructing the sorted string
+    strcpy(x, "");  // Empty the original string
+    for (int i = 0; i < n; i++) {
+        strcat(x, w[i]);
+        if (i < n - 1) {
+            strcat(x, " ");  // Add a space between words
+        }
+    }
+
+    // Display the sorted string
+    printf("Sorted string: %s\n", x);
 }
