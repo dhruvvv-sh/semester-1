@@ -21,4 +21,13 @@ int main(){
         }fprintf(fp,"\n");
     }
     fclose(fp);
+    fp = fopen("2.txt", "r");
+    int i;
+    printf("\nThe matrix from the file is:\n");
+    while ((i = fgetw(fp)) != EOF) {
+        putw(i);
+    }
+    fclose(fp);
+
+    return 0;
 }
