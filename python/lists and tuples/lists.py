@@ -1,0 +1,11 @@
+marks = [10,30,90,45,60]
+print("before sorting")
+print(marks)
+marks.sort()
+print("after sorting:")
+print(marks)
+tup = (1,2,3,4,5,6,7,8,9,10,1,1,1,1)
+q = tup.index(8)
+z = tup.count(1)
+print(z)
+print(q+1)
